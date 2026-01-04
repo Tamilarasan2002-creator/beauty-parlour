@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+  /* ===== Luxury Focus Animation ===== */
+  @keyframes focusReveal {
+    0% {
+      opacity: 0;
+      filter: blur(12px);
+      transform: translateY(30px) scale(0.98);
+    }
+    100% {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes shimmerText {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .animate-focus {
+    opacity: 0;
+    animation: focusReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .delay-1 { animation-delay: 0.2s; }
+  .delay-2 { animation-delay: 0.4s; }
+  .delay-3 { animation-delay: 0.6s; }
+
+  .service-card {
+    transition: all 0.4s ease-out;
+  }
+
+  .service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px -5px rgba(219, 39, 119, 0.25);
+  }
+
+  .service-card:hover .card-img {
+    transform: scale(1.08);
+  }
+
+  @keyframes slowPan {
+    0% { transform: scale(1.1) translate(0, 0); }
+    100% { transform: scale(1.15) translate(-10px, -5px); }
+  }
+</style>
+
+<!-- ================= HERO SECTION ================= -->
+<section class="relative w-full h-[420px] md:h-[600px] overflow-hidden mt-0 pt-0" style="margin-top:-1px;">
+
+  <!-- Background -->
+<!-- Background Image -->
+<div class="absolute inset-0 -z-10 bg-cover bg-center"
+     style='background-image: url("{% static "images/bg.jpg" %}");
+            animation: slowPan 30s infinite alternate ease-in-out;'>
+</div>
+
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+
+  <!-- Content -->
+  <div class="relative z-10 h-full flex items-center">
+    <div class="max-w-7xl mx-auto px-5 md:px-6 text-white w-full">
+
+      <h1 class="animate-focus text-3xl sm:text-4xl md:text-7xl font-extrabold mb-5 md:mb-6 leading-tight">
+        Glow With <br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-white to-pink-300 bg-[length:200%_auto]"
+              style="animation: shimmerText 3s linear infinite;">
+          Confidence ✨
+        </span>
+      </h1>
+
+      <p class="animate-focus delay-2 max-w-lg text-base sm:text-lg md:text-xl text-gray-200 mb-7 md:mb-10">
+        Professional beauty services tailored just for you.
+        Experience the art of transformation.
+      </p>
+
+      <div class="animate-focus delay-3 flex flex-col sm:flex-row gap-4 sm:gap-5">
+        <a href="/booking/"
+           class="bg-pink-600 hover:bg-pink-500 text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-bold text-center transition">
+          Book Appointment
+        </a>
+
+        <a href="/services/"
+           class="bg-white/10 border border-white/20 hover:bg-white/20 text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold text-center transition">
+          View Services
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES SECTION ================= -->
+<section class="py-16 md:py-24 bg-[#FDF2F8]">
+  <div class="max-w-7xl mx-auto px-5 md:px-6">
+
+    <!-- Heading -->
+    <div class="text-center mb-12 md:mb-16 animate-focus delay-2">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
+        Our Premium Services
+      </h2>
+      <p class="text-gray-500 max-w-2xl mx-auto text-base md:text-lg">
+        Luxury treatments crafted for your elegance.
+      </p>
+      <div class="w-14 md:w-16 h-1 bg-pink-500 mx-auto mt-5 md:mt-6 rounded-full opacity-50"></div>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+
+      <!-- Eyebrows -->
+      <div class="service-card animate-focus delay-1 bg-white rounded-3xl overflow-hidden shadow-lg group">
+        <div class="h-52 md:h-64 overflow-hidden relative">
+          <img src="{% static 'images/eyebrows.jpg' %}" class="card-img h-full w-full object-cover transition duration-700">
+        </div>
+        <div class="p-5 md:p-8">
+          <h3 class="text-xl md:text-2xl font-bold mb-2">Eyebrow Shaping</h3>
+          <p class="text-gray-500 mb-4 text-sm md:text-base">Perfectly shaped eyebrows to enhance your facial features.</p>
+          <div class="flex justify-between items-center">
+            <span class="text-lg md:text-xl font-bold text-pink-600">₹499</span>
+            <a href="/booking/" class="bg-gray-100 hover:bg-pink-600 hover:text-white px-4 py-2 rounded-lg text-sm font-bold transition">Book</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mehendi -->
+      <div class="service-card animate-focus delay-2 bg-white rounded-3xl overflow-hidden shadow-lg group">
+        <div class="h-52 md:h-64 overflow-hidden">
+          <img src="{% static 'images/mehendi.jpg' %}" class="card-img h-full w-full object-cover transition duration-700">
+        </div>
+        <div class="p-5 md:p-8">
+          <h3 class="text-xl md:text-2xl font-bold mb-2">Mehendi Design</h3>
+          <p class="text-gray-500 mb-4 text-sm md:text-base">Intricate henna designs for weddings and occasions.</p>
+          <div class="flex justify-between items-center">
+            <span class="text-lg md:text-xl font-bold text-pink-600">₹1,999</span>
+            <a href="/booking/" class="bg-gray-100 hover:bg-pink-600 hover:text-white px-4 py-2 rounded-lg text-sm font-bold transition">Book</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Facial -->
+      <div class="service-card animate-focus delay-3 bg-white rounded-3xl overflow-hidden shadow-lg group">
+        <div class="h-52 md:h-64 overflow-hidden">
+          <img src="{% static 'images/facial.jpg' %}" class="card-img h-full w-full object-cover transition duration-700">
+        </div>
+        <div class="p-5 md:p-8">
+          <h3 class="text-xl md:text-2xl font-bold mb-2">Facial & Skin Care</h3>
+          <p class="text-gray-500 mb-4 text-sm md:text-base">Deep cleansing and rejuvenating facial treatments.</p>
+          <div class="flex justify-between items-center">
+            <span class="text-lg md:text-xl font-bold text-pink-600">₹2,499</span>
+            <a href="/booking/" class="bg-gray-100 hover:bg-pink-600 hover:text-white px-4 py-2 rounded-lg text-sm font-bold transition">Book</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nail -->
+      <div class="service-card animate-focus delay-1 bg-white rounded-3xl overflow-hidden shadow-lg group">
+        <div class="h-52 md:h-64 overflow-hidden">
+          <img src="{% static 'images/nails.jpg' %}" class="card-img h-full w-full object-cover transition duration-700">
+        </div>
+        <div class="p-5 md:p-8">
+          <h3 class="text-xl md:text-2xl font-bold mb-2">Nail Art</h3>
+          <p class="text-gray-500 mb-4 text-sm md:text-base">Trendy nail art designs with premium care.</p>
+          <div class="flex justify-between items-center">
+            <span class="text-lg md:text-xl font-bold text-pink-600">₹1,499</span>
+            <a href="/booking/" class="bg-gray-100 hover:bg-pink-600 hover:text-white px-4 py-2 rounded-lg text-sm font-bold transition">Book</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hair -->
+      <div class="service-card animate-focus delay-2 bg-white rounded-3xl overflow-hidden shadow-lg group">
+        <div class="h-52 md:h-64 overflow-hidden">
+          <img src="{% static 'images/hair.jpg' %}" class="card-img h-full w-full object-cover transition duration-700">
+        </div>
+        <div class="p-5 md:p-8">
+          <h3 class="text-xl md:text-2xl font-bold mb-2">Hair Styling</h3>
+          <p class="text-gray-500 mb-4 text-sm md:text-base">Professional haircuts and styling treatments.</p>
+          <div class="flex justify-between items-center">
+            <span class="text-lg md:text-xl font-bold text-pink-600">₹1,999</span>
+            <a href="/booking/" class="bg-gray-100 hover:bg-pink-600 hover:text-white px-4 py-2 rounded-lg text-sm font-bold transition">Book</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Party -->
+      <div class="service-card animate-focus delay-3 bg-white rounded-3xl overflow-hidden shadow-lg group">
+        <div class="h-52 md:h-64 overflow-hidden">
+          <img src="{% static 'images/party.jpg' %}" class="card-img h-full w-full object-cover transition duration-700">
+        </div>
+        <div class="p-5 md:p-8">
+          <h3 class="text-xl md:text-2xl font-bold mb-2">Party Makeup</h3>
+          <p class="text-gray-500 mb-4 text-sm md:text-base">Glamorous looks for parties and events.</p>
+          <div class="flex justify-between items-center">
+            <span class="text-lg md:text-xl font-bold text-pink-600">₹3,999</span>
+            <a href="/booking/" class="bg-gray-100 hover:bg-pink-600 hover:text-white px-4 py-2 rounded-lg text-sm font-bold transition">Book</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="max-w-xl mx-auto px-6 py-12">
+  <h2 class="text-3xl font-bold text-center mb-8">Book Appointment</h2>
+
+  <form method="post" class="bg-white p-6 rounded-lg shadow space-y-4">
+    {% csrf_token %}
+
+    <input type="text" name="name" placeholder="Your Name"
+      class="w-full border p-3 rounded">
+
+    <input type="text" name="phone" placeholder="Phone Number"
+      class="w-full border p-3 rounded">
+
+    <select name="service" class="w-full border p-3 rounded">
+      {% for service in services %}
+      <option value="{{ service.id }}">{{ service.name }}</option>
+      {% endfor %}
+    </select>
+
+    <input type="date" name="date" class="w-full border p-3 rounded">
+    <input type="time" name="time" class="w-full border p-3 rounded">
+
+    <!-- ACTION BUTTONS -->
+    <div class="flex gap-4 pt-2">
+      <!-- Submit -->
+      <button
+        type="submit"
+        class="w-full bg-pink-600 text-white py-3 rounded hover:bg-pink-700">
+        Book Now
+      </button>
+
+      <!-- Cancel / Back -->
+      <button
+        type="button"
+        onclick="history.back()"
+        class="w-full border border-gray-400 text-gray-600 py-3 rounded hover:bg-gray-100">
+        Cancel
+      </button>
+    </div>
+
+  </form>
+</div>
+
+{% endblock %}
