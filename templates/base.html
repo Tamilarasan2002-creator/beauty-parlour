@@ -105,9 +105,11 @@
 
     🔔
 
-    <span class="absolute -top-1 -right-1 bg-red-600 text-white
-                 text-xs min-w-[20px] h-5 px-1
-                 flex items-center justify-center rounded-full">
+    <span
+      id="bookingCount"
+      class="absolute -top-1 -right-1 bg-red-600 text-white
+             text-xs min-w-[20px] h-5 px-1
+             flex items-center justify-center rounded-full">
       {{ bookings|length }}
     </span>
   </button>
@@ -124,21 +126,27 @@
 
   <div class="flex justify-between items-center p-4 border-b">
     <h3 class="font-semibold text-pink-600 text-lg">
-  Today's Bookings
-</h3>
-  
-    <button onclick="toggleBookingPanel()" class="text-gray-500 text-xl">
-      ✕
-    </button>
+      Today's Bookings
+    </h3>
+    <button onclick="toggleBookingPanel()" class="text-gray-500 text-xl">✕</button>
   </div>
 
-  <div class="overflow-y-auto p-4 space-y-3 text-sm">
+  <div class="overflow-y-auto p-4 space-y-3 text-sm" id="bookingList">
     {% for booking in bookings %}
-      <div class="border rounded-lg p-3">
-        <p><b>Name:</b> {{ booking.name }}</p>
-        <p><b>Phone:</b> {{ booking.phone }}</p>
-        <p><b>Service:</b> {{ booking.service.name }}</p>
-        <p><b>Date:</b> {{ booking.date }} {{ booking.time }}</p>
+      <div class="border rounded-lg p-3 flex justify-between booking-item">
+        <div>
+          <p><b>Name:</b> {{ booking.name }}</p>
+          <p><b>Phone:</b> {{ booking.phone }}</p>
+          <p><b>Service:</b> {{ booking.service.name }}</p>
+          <p><b>Date:</b> {{ booking.date }} {{ booking.time }}</p>
+        </div>
+
+        <!-- CLEAR BUTTON -->
+        <button
+          onclick="clearBooking(this)"
+          class="text-xs text-red-600 hover:underline ml-3">
+          Clear
+        </button>
       </div>
     {% endfor %}
   </div>
@@ -152,6 +160,21 @@
 
   function toggleBookingPanel() {
     document.getElementById("bookingPanel").classList.toggle("hidden");
+  }
+
+  function clearBooking(btn) {
+    const bookingItem = btn.closest(".booking-item");
+    bookingItem.remove();
+
+    const remaining = document.querySelectorAll(".booking-item").length;
+    const countBadge = document.getElementById("bookingCount");
+
+    if (remaining > 0) {
+      countBadge.innerText = remaining;
+    } else {
+      countBadge.remove();
+      document.getElementById("bookingPanel").classList.add("hidden");
+    }
   }
 </script>
 
